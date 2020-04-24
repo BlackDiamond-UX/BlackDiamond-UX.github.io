@@ -1,24 +1,14 @@
-// Séléctionner les aiguilles de montre
-const AIGUILLEHR = document.querySelector("#hour");
-const AIGUILLEMIN = document.querySelector("#minute");
-const AIGUILLESEC = document.querySelector("#second");
+/**
+* Until CSS can enable us to tell time,
+* we need js to set the correct time. 
+* The accuracy of this clock depends on that of your device.
+* This is still a pure CSS clock because it's functionality is
+* completely in CSS.
+*/
 
-//Extraire l'heure actuel à l'aide de l'objet Date()
-
-
-//Ajouter l'heure , minite , seconde  dans des varaiables
-
-
-
-// Calculer de degré de mouvement de l'aiguille heure, de l'aiguille minute, de l'aiguille seconde
-// Hint : Tous les aiguilles doivent se déplacer chaque second selon un degré
-
-
-// Déplacer les aiguilles 
-function demarrerLaMontre() {
-
-
-
-}
-// Exercuter la fonction chaque second
-var interval = setInterval(demarrerLaMontre, 1000);
+const svg = document.querySelector('svg');
+const currentTime = new Date();
+console.log(currentTime.getSeconds());
+svg.style.setProperty('--start-seconds', currentTime.getSeconds());
+svg.style.setProperty('--start-minutes', currentTime.getMinutes());
+svg.style.setProperty('--start-hours', currentTime.getHours() % 12);
