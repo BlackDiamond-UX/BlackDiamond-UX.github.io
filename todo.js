@@ -67,5 +67,10 @@ list.addEventListener('click', event => {
     const itemKey = event.target.parentElement.dataset.key;
     deleteTodo(itemKey);
   }
-
+  var val = confirm("Voulez-vous continuer?");
+  if( val == true ) {
+    document.getElementById("span").style.display = 'hidden';
+  } else {
+    document.getElementById("span").style.visibility = 'show';
+  }
 });
