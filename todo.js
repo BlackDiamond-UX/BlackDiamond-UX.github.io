@@ -1,138 +1,71 @@
-//ADD new To do 
-const addForm = document.querySelector('.add');
-const list = document.querySelector('.todos');
-const popup = document.querySelector('.popup');
-const gPop = document.querySelector('.popup-wrapper');
-const btn = document.querySelector('.btn');
-const search = document.querySelector('.search input');
-gPop.style.display = "none";
+let todoItems = [];
 
+function addTodo(text) {
+  const todo = {
+    text,
+    checked: false,
+    id: Date.now(),
+  };
 
-/***************reusable function********************/
+  todoItems.push(todo);
 
-/* Function pour l'alert et le popup qui va etre afficher (time control)*/
-function start(duree)
-{
-var o=document.getElementById("sp");
-if(duree > 0)
-{
-o.innerHTML = duree;
-gPop.style.display = "block";
-setTimeout("start("+duree+" -1)", 1000);
-}
-else
-{
-   alert("enter a valid to do");
-o.innerHTML ="Au revoir";
-gPop.style.display="none";
-popup.style.visibility ="hidden";
-
-}};
-
-
-/* Function Creation dynamique du POPUP */
-
-function create(){
-   const div = document.createElement('div');
-   div.classList.add('popup-close');
-   div.setAttribute('id','closing');
-   const text = document.createTextNode('X');
-   div.appendChild(text);
-   popup.append(div);
-   const div2 = document.createElement('div');
-   div2.classList.add('popup-content');
-   const html = `
-   <span id="sp">1</span>
-   <h2>Fill the Input</h2>
-   <p>Don't forget</p>
-   <a href="#">Return</a>`;
-   div2.innerHTML=html;
-   popup.append(div2); 
-   
+  const list = document.querySelector('.js-todo-list');
+  list.insertAdjacentHTML('beforeend', `
+    <li class="todo-item" data-key="${todo.id}">
+      <input id="${todo.id}" type="checkbox"/>
+      <label for="${todo.id}" class="tick js-tick"></label>
+      <span>${todo.text}</span>
+      <button class="delete-todo js-delete-todo">
+        <svg><use href="#delete-icon"></use></svg>
+      </button>
+    </li>
+  `);
 }
 
-/* Function generation dynamique des TODOS */
+function toggleDone(key) {
+  const index = todoItems.findIndex(item => item.id === Number(key));
+  todoItems[index].checked = !todoItems[index].checked;
 
-const generateTemp = todo =>{
-   const html = `
-   <li class="list-group-item d-flex justify-content-between align-items-center">
-             <span>${todo}</span>
-             <i class="fas fa-trash delete"></i>
-            </li>
-   `;  
-   list.innerHTML += html;
-};
-
-
-/* function pour controller l'evenement et pour ne pas etre repeté à chaque clique */
-function onetime(node, type, callback) {
-
-	node.addEventListener(type, function(e) {
-	
-		e.target.removeEventListener(e.type, arguments.callee);
-
-		return callback(e);
-	});
+  const item = document.querySelector(`[data-key='${key}']`);
+  if (todoItems[index].checked) {
+    item.classList.add('done');
+  } else {
+    item.classList.remove('done');
+  }
 }
 
-onetime(gPop,'click',handler);
-
-    function handler(e){
-         
-      if(e.target.id='closing'){
-   
-         gPop.style.display ="none";
-   }
-}
-
-/***************Fin reusable function********************/
-
-
-
-
-/************* Adding TO DO**************/
-
-//Eventlistner Add TODOS
-btn.addEventListener('click',e =>{
- 
+function deleteTodo(key) {
+  todoItems = todoItems.filter(item => item.id !== Number(key));
+  const item = document.querySelector(`[data-key='${key}']`);
+  item.remove();
   
+  const list = document.querySelector('.js-todo-list');
+  if (todoItems.length === 0) list.innerHTML = '';
+}
+
+const form = document.querySelector('.js-form');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const input = document.querySelector('.js-todo-input');
+
+  const text = input.value.trim();
+  if (text !== '') {
+    addTodo(text);
+    input.value = '';
+    input.focus();
+  }
 });
 
-/************* Fin Adding TO DO**************/
-
-
-
-/*************Deleting  TO DO**************/
-list.addEventListener('click',e =>{
+const list = document.querySelector('.js-todo-list');
+list.addEventListener('click', event => {
+  if (event.target.classList.contains('js-tick')) {
+    const itemKey = event.target.parentElement.dataset.key;
+    toggleDone(itemKey);
+  }
+  
+  if (event.target.classList.contains('js-delete-todo')) {
+    const itemKey = event.target.parentElement.dataset.key;
+    deleteTodo(itemKey);
+  }
 
 });
-
-/************* Fin Deleting  TO DO**************/
-
-
-
-
-/************************************* SEARCH ITEM********************************************/
-//filtering Todos :
-
-//we will apply a class to the Todos that dont match and the that class will
-
-// have keyup event 
-
-
-
-const retrieve = (term) =>{
-
-   //function pour faire un filtre i
-};  
-
-
-//evenement de recherche des mots clés 
-search.addEventListener('keyup', () =>{
-  
-
-})
-
-/*************************************Fin SEARCH ITEM********************************************/
-
-
