@@ -1,194 +1,181 @@
-:root {
-    background: url(youcode.jpg);
-  }
-  
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  svg {
-    height: 100vh;
-    fill: none;
-    stroke: #000;
-    stroke-width: 1;
-    stroke-linecap: round;
-    transform: rotate(-90deg);
-    --start-seconds: 57;
-    --start-minutes: 45;
-    --start-hours: 11;
-  }
-  
-  circle {
-    fill: white;
-    opacity: 50%;
-    width: 50%;
-    height: 50%;
-  }
-  .wrapper {
-    display: block;
-    position: absolute;
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'exo 2', sans-serif;
+}
+
+body{
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	background: linear-gradient(45deg, #2ecc71, #16a085);
+}
+
+.clock{
+	position: relative;
+	width: 500px;
+	height: 500px;
+	overflow: hidden;
+	border-radius: 250px;
+	border: 10px solid #111;
+	background-color: #fff;
     top: 50%;
-    left:50%;
-    -webkit-transform: translate(-50%,-50%);
-  }
-  
-  h1 a {
-    color: #fff;
-    font-size: 2em;
-    text-decoration: none;
-    display: inline-block;
-    position: relative;
-    font-family: 'Dosis', sans-serif;
-  }
-  
-  /*effect-underline*/
-  a.effect-underline:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    display: inline-block;
-    height: 1em;
-    width: 100%;
-    border-bottom: 1px solid;
-    margin-top: 10px;
-    opacity: 0;
-    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-    transition: opacity 0.35s, transform 0.35s;
-    -webkit-transform: scale(0,1);
-    transform: scale(0,1);
-  }
-  
-  a.effect-underline:hover:after {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-  
-  .marks {
-    transform: translate(20px, 20px);
-    stroke-width: 0.2;
-  }
-  
-  .seconds,
-  .minute,
-  .hour
-  {
-    transform: translate(20px, 20px) rotate(0deg);
-  }
-  
-  .seconds {
-    transform: translate(20px, 20px) rotate(calc(var(--start-seconds) * 6deg));
-    stroke-width: 0.3;
-    animation: rotateSecondHand 60s steps(60) infinite;
-    stroke: #d00505;
-  }
-  
-  .minute {
-    transform: translate(20px, 20px) rotate(calc(var(--start-minutes) * 6deg));
-    stroke-width: 0.6;
-    animation: rotateMinuteHand 3600s steps(60) infinite;
-    animation-delay: calc(var(--start-seconds) * -1 * 1s);
-  }
-  
-  .hour {
-    transform: translate(20px, 20px) rotate(calc(var(--start-hours) * 30deg));
-    animation: rotateHourHand calc(12 * 60 * 60s) linear infinite;
-    stroke-width: 1;
-    animation-delay: calc(calc(var(--start-minutes) * -60 * 1s) + calc(var(--start-seconds) * -1 * 1s));
-  }
-  
-  .tiaText {
-    font-size: 1px;
-    font-family: sans-serif;
-    transform: translate(14px, 19px) rotate(90deg);
-    fill: #dfdfdf;
-    stroke: none;
-  }
-  
-  .pin {
-    stroke: #d00505;
-    stroke-width: 0.2;
-  }
-  
-  @keyframes rotateSecondHand {
-    from {
-      transform: translate(20px, 20px) rotate(calc(var(--start-seconds) * 6deg));
-    }
-    to {
-      transform: translate(20px, 20px) rotate(calc(var(--start-seconds) * 6deg + 360deg));
-    }
-  }
-  
-  @keyframes rotateMinuteHand {
-    from {
-      transform: translate(20px, 20px) rotate(calc(var(--start-minutes) * 6deg));
-    }
-    to {
-      transform: translate(20px, 20px) rotate(calc(var(--start-minutes) * 6deg + 360deg));
-    }
-  }
-  
-  @keyframes rotateHourHand {
-    from {
-      transform: translate(20px, 20px) rotate(calc(var(--start-hours) * 30deg));
-    }
-    to {
-      transform: translate(20px, 20px) rotate(calc(var(--start-hours) * 30deg + 360deg));
-    }
-  }
-  
-  /* marks */
-  .marks > line:nth-child(1) {
-    transform: rotate(30deg);
-  }
-  
-  .marks > line:nth-child(2) {
-    transform: rotate(calc(2 * 30deg));
-  }
-  
-  .marks > line:nth-child(3) {
-    transform: rotate(calc(3 * 30deg));
-    stroke-width: 0.5;
-  }
-  
-  .marks > line:nth-child(4) {
-    transform: rotate(calc(4 * 30deg));
-  }
-  .marks > line:nth-child(5) {
-    transform: rotate(calc(5 * 30deg));
-  }
-  
-  .marks > line:nth-child(6) {
-    transform: rotate(calc(6 * 30deg));
-    stroke-width: 0.5;
-  }
-  
-  .marks > line:nth-child(7) {
-    transform: rotate(calc(7 * 30deg));
-  }
-  
-  .marks > line:nth-child(8) {
-    transform: rotate(calc(8 * 30deg));
-  }
-  
-  .marks > line:nth-child(9) {
-    transform: rotate(calc(9 * 30deg));
-    stroke-width: 0.5;
-  }
-  
-  .marks > line:nth-child(10) {
-    transform: rotate(calc(10 * 30deg));
-  }
-  
-  .marks > line:nth-child(11) {
-    transform: rotate(calc(11 * 30deg));
-  }
-  .marks > line:nth-child(12) {
-    transform: rotate(calc(12 * 30deg));
-    stroke-width: 0.5;
-  }
-  
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.clock:after{
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: linear-gradient(285deg, rgba(0, 0, 0, 0.175) 50%, rgba(0, 0, 0, 0.1) 50%);
+}
+
+.clock:before{
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 20px;
+	height: 20px;
+	background-color: black;
+	border-radius: 50%;
+}
+
+.num{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	text-align: center;
+	font-size: 2rem;
+	font-weight: 700;
+	padding: 18px;
+}
+
+.num:after{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 5px;
+	height: 15px;
+	background-color: black;
+}
+
+.num1{
+	transform: rotate(30deg);
+}
+.num1 div{
+	transform: rotate(-30deg);
+}
+
+.num2{
+	transform: rotate(60deg);
+}
+.num2 div{
+	transform: rotate(-60deg);
+}
+
+.num3{
+	transform: rotate(90deg);
+}
+.num3 div{
+	transform: rotate(-90deg);
+}
+
+.num4{
+	transform: rotate(120deg);
+}
+.num4 div{
+	transform: rotate(-120deg);
+}
+
+.num5{
+	transform: rotate(150deg);
+}
+.num5 div{
+	transform: rotate(-150deg);
+}
+
+.num6{
+	transform: rotate(180deg);
+}
+.num6 div{
+	transform: rotate(-180deg);
+}
+
+.num7{
+	transform: rotate(210deg);
+}
+.num7 div{
+	transform: rotate(-210deg);
+}
+
+.num8{
+	transform: rotate(240deg);
+}
+.num8 div{
+	transform: rotate(-240deg);
+}
+
+.num9{
+	transform: rotate(270deg);
+}
+.num9 div{
+	transform: rotate(-270deg);
+}
+
+.num10{
+	transform: rotate(300deg);
+}
+.num10 div{
+	transform: rotate(-300deg);
+}
+
+.num11{
+	transform: rotate(330deg);
+}
+.num11 div{
+	transform: rotate(-330deg);
+}
+
+.hand{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.hand div{
+	position: absolute;
+	bottom: 50%;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #000;
+}
+
+.sec{
+	width: 1px;
+	height: 40%;
+}
+
+.min{
+	height: 38%;
+	width: 4px;
+	border-radius: 2px;
+}
+
+.hour{
+	height: 28%;
+	width: 8px;
+	border-radius: 4px;
+}
